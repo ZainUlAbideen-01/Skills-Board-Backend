@@ -8,11 +8,11 @@ export interface IUser extends Document {
   isVerified: boolean;
   photoUrl?: string;
   location?: {
-    city?: string;
-    neighborhood?: string;
-    lat: number;
-    lng: number;
-  };
+  city?: string;
+  neighborhood?: string;
+  lat?: number;
+  lng?: number;
+};
   bio?: string;
   createdAt: Date;
 }
