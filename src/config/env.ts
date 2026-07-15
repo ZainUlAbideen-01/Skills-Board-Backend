@@ -11,7 +11,8 @@ const env = {
     MAIL_PORT: parseInt(process.env.MAIL_PORT || '587'),
     MAIL_USER: process.env.MAIL_USER || '',
     MAIL_PASS: process.env.MAIL_PASS || '',
-    MAIL_FROM: process.env.MAIL_FROM || '',
+    MAIL_FROM: process.env.MAIL_FROM || ''
+    
 };
 
 if (!env.MONGO_URI) throw new Error('MONGO_URI is not defined in .env');
