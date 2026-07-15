@@ -11,17 +11,13 @@ const env = {
     MAIL_PORT: parseInt(process.env.MAIL_PORT || '587'),
     MAIL_USER: process.env.MAIL_USER || '',
     MAIL_PASS: process.env.MAIL_PASS || '',
-    MAIL_FROM: process.env.MAIL_FROM || '',
-    CLOUDINARY_CLOUD_NAME:process.env.CLOUDINARY_CLOUD_NAME || '',
-CLOUDINARY_API_KEY:process.env.CLOUDINARY_API_KEY || '',
-CLOUDINARY_API_SECRET:process.env.CLOUDINARY_API_SECRET || ''
+    MAIL_FROM: process.env.MAIL_FROM || ''
+    
 };
 
 if (!env.MONGO_URI) throw new Error('MONGO_URI is not defined in .env');
 if (!env.JWT_SECRET) throw new Error('JWT_SECRET is not defined in .env');
 if (!env.MAIL_USER) throw new Error('MAIL_USER is not defined in .env');
 if (!env.MAIL_PASS) throw new Error('MAIL_PASS is not defined in .env');
-if (!env.CLOUDINARY_API_KEY) throw new Error('CLOUDINARY_API_KEY is not defined in .env');
-if (!env.CLOUDINARY_API_SECRET) throw new Error('CLOUDINARY_API_SECRET is not defined in .env');
 
 export default env;

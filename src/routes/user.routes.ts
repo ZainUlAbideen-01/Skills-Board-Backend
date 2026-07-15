@@ -3,12 +3,13 @@ import {
  getCurrentUser,getUserById,editUserProfile
 } from '../controllers/user.controller';
 import { protect } from '../middleware/auth';
-import upload from '../middleware/upload';
+
 
 const router = Router();
+console.log("User Routes Loaded");
 
 router.get('/me',protect ,getCurrentUser);
 router.get('/:id',protect,getUserById);
-router.put('/me',protect,upload.single("photo"),editUserProfile);
+router.put('/me',protect,editUserProfile);
 
 export default router;

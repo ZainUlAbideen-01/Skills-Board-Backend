@@ -3,7 +3,7 @@ import User from '../models/User';
 import { AuthRequest } from '../middleware/auth';
 import { sendSuccess } from '../utils/response';
 import AppError from '../utils/AppError';
-import { uploadImage } from '../utils/cloudinary';
+
 // GET /api/users/me
 export const getCurrentUser = async (
   req: AuthRequest,
@@ -50,11 +50,7 @@ export const getUserById = async (
   next: NextFunction
 ): Promise<void> => {
 
-    //to test if req.file reponds
-    console.log("========== CONTROLLER ==========");
-console.log("req.file:", req.file);
-console.log("req.body:", req.body);
-console.log("================================");
+   
   try {
     const { id } = req.params;
 
@@ -111,15 +107,16 @@ export const editUserProfile = async (
       );
     }
 
-    const {
-      username,
-      name,
-      bio,
-      city,
-      neighborhood,
-      lat,
-      lng,
-    } = req.body;
+  const {
+    username,
+    name,
+    bio,
+    city,
+    neighborhood,
+    lat,
+    lng,
+    photoUrl
+} = req.body;
 
     // Username
     if (username !== undefined) {
@@ -181,16 +178,10 @@ export const editUserProfile = async (
     }
 
     // Upload image
-    if (req.file) {
-      const imageUrl = await uploadImage(req.file);
-      user.photoUrl = imageUrl;
-     
-    }
-     if (!req.file) {
-      console.log('hiii')
-     
-    }
-
+   if (photoUrl !== undefined) {
+    user.photoUrl = photoUrl;
+}
+    
      
 
     await user.save();
