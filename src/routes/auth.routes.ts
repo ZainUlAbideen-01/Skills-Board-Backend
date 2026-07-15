@@ -9,17 +9,18 @@ import {
   resetPassword,
 } from '../controllers/auth.controller';
 import { protect } from '../middleware/auth';
+import { authLimiter } from '../middleware/rateLimiter';
 
 const router = Router();
 
-router.post('/signup', signup);
-router.post('/verify-otp', verifyOTP);
+router.post('/signup', authLimiter, signup);
+router.post('/verify-otp', authLimiter, verifyOTP);
 
-router.post('/login', login);
+router.post('/login', authLimiter, login);
 router.post('/logout', protect, logout);
 
-router.post('/forgot-password', forgotPassword);
-router.post('/verify-reset-otp', verifyResetOTPHandler);
-router.post('/reset-password', resetPassword);
+router.post('/forgot-password', authLimiter, forgotPassword);
+router.post('/verify-reset-otp', authLimiter, verifyResetOTPHandler);
+router.post('/reset-password', authLimiter, resetPassword);
 
-export default router;
+export default router

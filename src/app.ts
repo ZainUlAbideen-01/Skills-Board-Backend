@@ -8,11 +8,14 @@ import messageRoutes from './routes/message.routes';
 import exchangeRoutes from './routes/exchange.routes';
 import reviewRoutes from './routes/review.routes';
 import errorHandler from './middleware/errorHandler';
+import { globalLimiter } from './middleware/rateLimiter';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+app.use('/api', globalLimiter);
 
 // Routes
 app.use('/api/auth', authRoutes);
