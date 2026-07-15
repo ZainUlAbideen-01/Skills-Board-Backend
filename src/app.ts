@@ -3,6 +3,7 @@ import cors from 'cors';
 
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
+import listingRoutes from './routes/listing.routes';
 import matchRoutes from './routes/match.routes';
 import messageRoutes from './routes/message.routes';
 import exchangeRoutes from './routes/exchange.routes';
@@ -20,6 +21,7 @@ app.use('/api', globalLimiter);
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/listings', listingRoutes);
 app.use('/api/matches', matchRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/exchanges', exchangeRoutes);

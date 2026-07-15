@@ -6,7 +6,6 @@ import { protect } from '../middleware/auth';
 
 
 const router = Router();
-console.log("User Routes Loaded");
 
 router.get('/me',protect ,getCurrentUser);
 router.get('/:id',protect,getUserById);
