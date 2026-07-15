@@ -5,7 +5,7 @@ import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import matchRoutes from './routes/match.routes';
 import messageRoutes from './routes/message.routes';
-
+import listingRoutes from './routes/listing.routes';
 import errorHandler from './middleware/errorHandler';
 
 const app = express();
@@ -16,6 +16,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/listings', listingRoutes)
 app.use('/api/matches', matchRoutes);
 app.use('/api/messages', messageRoutes);
 
