@@ -8,6 +8,8 @@ import matchRoutes from './routes/match.routes';
 import messageRoutes from './routes/message.routes';
 import exchangeRoutes from './routes/exchange.routes';
 import reviewRoutes from './routes/review.routes';
+import blockRoutes from './routes/block.routes';
+import reportRoutes from './routes/report.routes';
 import errorHandler from './middleware/errorHandler';
 import { globalLimiter } from './middleware/rateLimiter';
 
@@ -29,6 +31,8 @@ app.use('/api/matches', matchRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/exchanges', exchangeRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/blocks',blockRoutes);
+app.use('/api/reports',reportRoutes)
 
 // Health Check
 app.get('/api/health', (_req, res) => {
