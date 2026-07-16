@@ -9,10 +9,14 @@ const transporter = nodemailer.createTransport({
     host: env.MAIL_HOST,
     port: env.MAIL_PORT,
     secure: env.MAIL_PORT === 465, // true for 465, false for 587
+    debug: true,
     auth: {
         user: env.MAIL_USER,
         pass: env.MAIL_PASS,
     },
 });
 
+dns.lookup(env.MAIL_HOST, { all: true }, (err, addresses) => {
+    console.log(addresses);
+});
 export default transporter;
