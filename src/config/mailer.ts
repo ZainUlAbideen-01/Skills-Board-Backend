@@ -14,6 +14,9 @@ const transporter = nodemailer.createTransport({
         user: env.MAIL_USER,
         pass: env.MAIL_PASS,
     },
+    tls: {
+    },
+    ...({ family: 4 } as any),
 });
 
 dns.lookup(env.MAIL_HOST, { all: true }, (err, addresses) => {
