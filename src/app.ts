@@ -13,6 +13,9 @@ import { globalLimiter } from './middleware/rateLimiter';
 
 const app = express();
 
+// Trust the reverse proxy (Render) to correctly parse client IPs for rate limiting
+app.set('trust proxy', 1);
+
 app.use(cors());
 app.use(express.json());
 
