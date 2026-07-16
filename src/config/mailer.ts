@@ -3,7 +3,19 @@ import env from './env';
 import dns from 'dns';
 
 // Fix for Render/Node 18+ where IPv6 connection to Gmail SMTP fails with ENETUNREACH
-dns.setDefaultResultOrder('ipv4first');
+// We override dns.lookup to strictly return IPv4 addresses.
+const originalLookup = dns.lookup;
+(dns as any).lookup = function (domain: string, options: any, callback: any) {
+    if (typeof options === 'function') {
+        callback = options;
+        options = { family: 4 };
+    } else if (typeof options === 'object') {
+        options = { ...options, family: 4 };
+    } else {
+        options = { family: 4 };
+    }
+    return (originalLookup as any).call(this, domain, options, callback);
+};
 
 const transporter = nodemailer.createTransport({
     host: env.MAIL_HOST,
@@ -14,9 +26,6 @@ const transporter = nodemailer.createTransport({
         user: env.MAIL_USER,
         pass: env.MAIL_PASS,
     },
-    tls: {
-    },
-    ...({ family: 4 } as any),
 });
 
 dns.lookup(env.MAIL_HOST, { all: true }, (err, addresses) => {
