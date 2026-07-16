@@ -11,11 +11,17 @@ import reviewRoutes from './routes/review.routes';
 import blockRoutes from './routes/block.routes';
 import reportRoutes from './routes/report.routes';
 import errorHandler from './middleware/errorHandler';
+import { globalLimiter } from './middleware/rateLimiter';
 
 const app = express();
 
+// Trust the reverse proxy (Render) to correctly parse client IPs for rate limiting
+app.set('trust proxy', 1);
+
 app.use(cors());
 app.use(express.json());
+
+app.use('/api', globalLimiter);
 
 // Routes
 app.use('/api/auth', authRoutes);

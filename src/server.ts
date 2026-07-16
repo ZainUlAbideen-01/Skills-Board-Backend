@@ -1,5 +1,4 @@
 import http from 'http';
-import app from './app';
 import { connectDB } from './config/db';
 import { connectRedis } from './config/redis';
 import { initSocket } from './config/socket';
@@ -9,6 +8,7 @@ const start = async () => {
   await connectDB();
   await connectRedis();
 
+  const { default: app } = await import('./app');
   const httpServer = http.createServer(app);
   initSocket(httpServer);
 
